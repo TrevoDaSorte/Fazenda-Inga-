@@ -1,0 +1,16 @@
+.service-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px}
+.service-stat{background:#fff;border:1px solid var(--border);border-radius:15px;padding:18px;display:flex;gap:13px;align-items:center;box-shadow:var(--shadow)}
+.s-icon{width:45px;height:45px;min-width:45px;border-radius:12px;display:grid;place-items:center;font-size:19px}
+.s-icon.green{background:#e8f5ec}.s-icon.blue{background:#e9f2fb}.s-icon.orange{background:#fff3e2}.s-icon.purple{background:#f0ebfb}
+.service-stat span{display:block;color:var(--muted);font-size:11px}.service-stat strong{display:block;margin-top:5px;font-size:18px}
+.service-form-panel{margin-bottom:18px}.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.form-grid label{display:flex;flex-direction:column;gap:7px}.form-grid label.full{grid-column:1/-1}.form-grid label span{font-size:11px;color:#53635a;font-weight:700}
+.form-grid input,.form-grid select,.form-grid textarea,.filters input,.filters select{width:100%;border:1px solid var(--border);background:#fbfcfb;border-radius:9px;padding:10px 11px;outline:none;color:var(--text);font-family:inherit;font-size:12px}
+.form-grid textarea{resize:vertical}.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus,.filters input:focus,.filters select:focus{border-color:#83ad91;box-shadow:0 0 0 3px #eaf5ee}
+.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:15px}.btn{border:0;border-radius:9px;padding:11px 17px;font-weight:700;font-size:12px;cursor:pointer}.btn.primary{background:var(--green);color:#fff}.btn.secondary{background:#eef2ef;color:#526057}.hidden{display:none}
+.list-header{align-items:center}.filters{display:flex;gap:8px}.filters input{min-width:230px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:950px}
+th{text-align:left;color:#76837c;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;border-bottom:1px solid var(--border)}
+td{padding:13px 10px;border-bottom:1px solid #edf1ee;font-size:11px}.badge{display:inline-block;border-radius:20px;padding:5px 8px;font-size:9px;font-weight:800}.badge.Pago{color:#267044;background:#e8f5ec}.badge.Pendente{color:#a36b15;background:#fff3df}.badge.Parcial{color:#426d9d;background:#e9f2fb}
+.direction{font-size:9px;font-weight:800;padding:5px 7px;border-radius:20px;background:#f1f4f2}.direction.Prestado{color:#267044;background:#e8f5ec}.direction.Contratado{color:#80591d;background:#fff3df}
+.action-btn{border:0;background:transparent;cursor:pointer;font-size:15px;margin-right:5px}.empty-row td{text-align:center;padding:50px 15px}.empty-row div{font-size:30px;margin-bottom:8px}.empty-row strong,.empty-row span{display:block}.empty-row strong{font-size:13px}.empty-row span{color:var(--muted);font-size:10px;margin-top:5px}
+@media(max-width:1050px){.service-stats{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.service-stats,.form-grid{grid-template-columns:1fr}.form-grid label.full{grid-column:auto}.list-header{display:block}.filters{margin-top:15px;flex-direction:column}.filters input{min-width:0}}
