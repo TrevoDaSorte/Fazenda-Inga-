@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Animais - Minha Fazenda</title>
+<link rel="stylesheet" href="Css/style.css"><link rel="stylesheet" href="Css/gado.css">
+</head>
+<body><div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div><div><strong>Minha Fazenda</strong><span>Sistema de Gestão</span></div></div>
+<nav class="menu">
+<a class="menu-item" href="index.html"><span>🏠</span> Dashboard</a>
+<a class="menu-item" href="vendas.html"><span>💰</span> Vendas</a>
+<a class="menu-item" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a>
+<a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a>
+<a class="menu-item" href="estoque.html"><span>📦</span> Estoque</a>
+<a class="menu-item active" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a>
+<a class="menu-item" href="galeria.html"><span>📷</span> Galeria</a>
+<a class="menu-item" href="relatorios.html"><span>📊</span> Relatórios</a>
+<a class="menu-item" href="administracao.html"><span>⚙️</span> Administração</a>
+<a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a>
+</nav><div class="sidebar-footer"><div class="status-dot"></div>Sistema online</div>
+</aside>
+
+<main class="main">
+<header class="topbar"><div><p class="eyebrow">GESTÃO DA FAZENDA</p><h1>Animais</h1><p class="subtitle">Controle do rebanho, aves, peixes e produção de ovos.</p></div>
+<div class="top-actions"><button class="icon-btn">🔔<span class="notification">3</span></button><div class="profile"><div class="avatar">FA</div><div><strong>Administrador</strong><span>Gestor da Fazenda</span></div></div></div></header>
+
+<section class="cattle-stats">
+<div class="cattle-stat"><div class="c-icon green">🐄</div><div><span>Total do rebanho</span><strong id="totalCattle">0</strong></div></div>
+<div class="cattle-stat"><div class="c-icon pink">🐄</div><div><span>Vacas</span><strong id="totalCows">0</strong></div></div>
+<div class="cattle-stat"><div class="c-icon blue">🐔</div><div><span>Aves</span><strong id="totalBirds">0</strong></div></div>
+<div class="cattle-stat"><div class="c-icon orange">🐴</div><div><span>Outros / lotes</span><strong id="totalOther">0</strong></div></div>
+</section>
+
+<section class="panel cattle-form-panel">
+<div class="panel-header"><div><h2 id="formTitle">Cadastrar animal / lote</h2><p>Cadastre bovinos, equinos, aves, peixes ou ovos.</p></div></div>
+<form id="cattleForm"><input type="hidden" id="animalId">
+<div class="form-grid">
+<label><span>Brinco / identificação *</span><input id="tag" required placeholder="Ex.: 001"></label>
+<label><span>Nome do animal</span><input id="animalName" placeholder="Ex.: Mimosa"></label>
+<label><span>Categoria *</span><select id="category" required><option>Vaca</option><option>Boi</option><option>Touro</option><option>Bezerro</option><option>Bezerra</option><option>Cavalo</option><option>Égua</option><option>Pato</option><option>Pata</option><option>Galinha</option><option>Galo</option><option>Galinha-d'Angola</option><option>Peixes</option><option>Ovos</option></select></label>
+
+<label><span>Sexo *</span><select id="sex" required><option>Fêmea</option><option>Macho</option><option>-</option></select></label>
+<label><span>Raça</span><input id="breed" placeholder="Ex.: Nelore, Gir, Girolando"></label>
+<label id="quantityField" class="hidden"><span>Quantidade do lote *</span><input id="quantity" type="number" min="1" step="1" value="1"></label>
+<div id="cowDetails" class="cow-options"><span>🐄 Opções da Vaca — marque quando se aplicar</span><label><input id="isCalved" type="checkbox"> Vaca parida</label><label><input id="isDairy" type="checkbox"> Vaca leiteira</label></div>
+<div id="individualFieldsNote" class="lot-note hidden">💡 Para peixes e ovos, use a quantidade do lote.</div>
+<label><span>Data de nascimento</span><input id="birthDate" type="date"></label>
+
+<label><span>Peso atual (kg)</span><input id="weight" type="number" min="0" step="0.1" placeholder="0"></label>
+<label><span>Mãe / identificação</span><input id="mother" placeholder="Nome ou brinco da mãe"></label>
+<label><span>Pai / identificação</span><input id="father" placeholder="Nome ou brinco do pai"></label>
+
+<label><span>Data de entrada</span><input id="entryDate" type="date"></label>
+<label><span>Origem</span><select id="origin"><option>Nascido na fazenda</option><option>Compra</option><option>Transferência</option><option>Outro</option></select></label>
+<label><span>Situação *</span><select id="status"><option>Ativo</option><option>Vendido</option><option>Transferido</option><option>Morto</option></select></label>
+
+<label id="purchaseValueField" class="hidden"><span>Valor da compra (R$) *</span><input id="purchaseValue" type="number" min="0" step="0.01" placeholder="0,00"></label>
+<label id="purchaseSupplierField" class="hidden"><span>Vendedor / fornecedor</span><input id="purchaseSupplier" placeholder="Quem vendeu o animal"></label>
+<label id="saleDateField" class="hidden"><span>Data da venda *</span><input id="saleDate" type="date"></label>
+<label id="saleValueField" class="hidden"><span>Valor da venda (R$) *</span><input id="saleValue" type="number" min="0" step="0.01" placeholder="0,00"></label>
+<label id="saleBuyerField" class="hidden"><span>Comprador *</span><input id="saleBuyer" placeholder="Nome do comprador"></label>
+
+<label class="full"><span>Observações</span><textarea id="notes" rows="3" placeholder="Informações importantes sobre o animal..."></textarea></label>
+</div>
+<div class="form-actions"><button type="button" id="cancelEdit" class="btn secondary hidden">Cancelar alteração</button><button type="reset" class="btn secondary">Limpar</button><button type="submit" id="saveButton" class="btn primary">💾 Salvar animal</button></div>
+</form>
+</section>
+
+<section class="panel">
+<div class="panel-header cattle-list-header"><div><h2>Animais e lotes cadastrados</h2><p>Consulte, altere ou exclua os registros.</p></div>
+<div class="filters"><input id="searchAnimal" type="search" placeholder="🔎 Brinco, nome ou raça"><select id="categoryFilter"><option value="">Todas as categorias</option><option>Vaca</option><option>Boi</option><option>Touro</option><option>Bezerro</option><option>Bezerra</option><option>Cavalo</option><option>Égua</option><option>Pato</option><option>Pata</option><option>Galinha</option><option>Galo</option><option>Galinha-d'Angola</option><option>Peixes</option><option>Ovos</option></select><select id="statusFilter"><option value="">Todas as situações</option><option>Ativo</option><option>Vendido</option><option>Transferido</option><option>Morto</option></select></div></div>
+<div class="table-wrap"><table><thead><tr><th>Brinco</th><th>Animal</th><th>Categoria</th><th>Raça / Quantidade</th><th>Nascimento</th><th>Peso</th><th>Situação</th><th>Ações</th></tr></thead><tbody id="cattleTable"></tbody></table></div>
+</section>
+
+<footer><span>© 2026 Minha Fazenda</span><span>Sistema de Gestão da Fazenda</span></footer>
+</main></div><script src="Js/firebase-sync.js?v=11" data-app="Js/gado.js"></script></body></html>

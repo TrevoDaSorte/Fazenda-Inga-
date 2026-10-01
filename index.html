@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faznda-Ingaí</title>
+  <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div>
+        <div>
+          <strong>Fazenda Ingaí</strong>
+          <span>Sistema de Gestão</span>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item active" href="index.html"><span>🏠</span>Ingaí</a>
+        <a class="menu-item" href="vendas.html"><span>💰</span> Vendas</a>
+        <a class="menu-item" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a>
+        <a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a>
+        <a class="menu-item" href="estoque.html"><span>📦</span> Estoque</a>
+        <a class="menu-item" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a>
+        <a class="menu-item" href="galeria.html"><span>📷</span> Galeria</a>
+<a class="menu-item" href="relatorios.html"><span>📊</span> Relatórios</a>
+<a class="menu-item" href="administracao.html"><span>⚙️</span> Administração</a>
+        <a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-dot"></div>
+        Sistema online
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PAINEL DE CONTROLE</p>
+          <h1>Bom dia! 👋</h1>
+          <p class="subtitle">Acompanhe os principais dados da sua fazenda.</p>
+        </div>
+
+        <div class="top-actions">
+          <button class="icon-btn" title="Notificações">🔔<span class="notification">3</span></button>
+          <div class="profile">
+            <div class="avatar">FA</div>
+            <div>
+              <strong>Administrador</strong>
+              <span>Gestor da Fazenda</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="stat-card">
+          <div class="stat-icon green">💰</div>
+          <div>
+            <span>Vendas do mês</span>
+            <strong id="dashSales">R$ 0,00</strong>
+            <small id="dashSalesCount">0 vendas no mês</small>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon orange">📦</div>
+          <div>
+            <span>Itens em estoque</span>
+            <strong id="dashStock">0</strong>
+            <small id="dashStockLow">0 com estoque baixo</small>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon blue">🐄</div>
+          <div>
+            <span>Total de animais</span>
+            <strong id="dashCattle">0</strong>
+            <small>Rebanho ativo</small>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon purple">🏭</div>
+          <div>
+            <span>Produção do mês</span>
+            <strong id="dashProduction">0</strong>
+            <small id="dashProductionQty">0 produzidos</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel large">
+          <div class="panel-header">
+            <div>
+              <h2>Resumo financeiro</h2>
+              <p>Visão geral das movimentações</p>
+            </div>
+            <select id="financePeriod">
+              <option value="month">Este mês</option>
+              <option value="3months">Últimos 3 meses</option>
+              <option value="year">Este ano</option>
+            </select>
+          </div>
+
+          <div class="finance-summary">
+            <div>
+              <span>Receitas</span>
+              <strong id="dashRevenue">R$ 0,00</strong>
+            </div>
+            <div>
+              <span>Despesas</span>
+              <strong id="dashExpenses">R$ 0,00</strong>
+            </div>
+            <div>
+              <span>Saldo</span>
+              <strong id="dashBalance">R$ 0,00</strong>
+            </div>
+          </div>
+
+          <div class="chart">
+            <div class="chart-line"></div>
+            <div class="chart-labels">
+              <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span>
+              <span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span>
+              <span>Set</span><span>Out</span><span>Nov</span><span>Dez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel animal-summary-panel">
+          <div class="panel-header"><div><h2>Animais da fazenda</h2><p>Quantidades por categoria</p></div><a href="gado.html" class="link">Ver animais →</a></div>
+          <div class="summary-grid">
+            <div><span>🐄 Vacas</span><b id="cowCount">0</b></div><div><span>🍼 Vacas paridas</span><b id="calvedCowCount">0</b></div><div><span>🥛 Vacas leiteiras</span><b id="dairyCowCount">0</b></div><div><span>🐂 Touros</span><b id="bullCount">0</b></div><div><span>🐂 Bois</span><b id="oxCount">0</b></div><div><span>🐮 Bezerros</span><b id="calfCount">0</b></div><div><span>🐮 Bezerras</span><b id="heiferCount">0</b></div><div><span>🐴 Cavalos</span><b id="horseCount">0</b></div><div><span>🐴 Éguas</span><b id="mareCount">0</b></div><div><span>🦆 Patos</span><b id="duckCount">0</b></div><div><span>🦆 Patas</span><b id="femaleDuckCount">0</b></div><div><span>🐔 Galinhas</span><b id="henCount">0</b></div><div><span>🐓 Galos</span><b id="roosterCount">0</b></div><div><span>🐔 Galinha-d'Angola</span><b id="guineaCount">0</b></div><div><span>🐟 Peixes</span><b id="fishCount">0</b></div><div><span>🥚 Ovos</span><b id="eggCount">0</b></div>
+          </div>
+        </div>
+
+        <div class="panel machine-summary-panel">
+          <div class="panel-header"><div><h2>Máquinas e transportes</h2><p>Patrimônio ativo</p></div><a href="maquinas.html" class="link">Ver patrimônio →</a></div>
+          <div class="summary-grid compact">
+            <div><span>🚜 Tratores</span><b id="tractorCount">0</b></div><div><span>🏍️ Motos</span><b id="motorcycleCount">0</b></div><div><span>🛞 Quadriciclos</span><b id="quadCount">0</b></div><div><span>🚲 Bicicletas</span><b id="bikeCount">0</b></div><div><span>🛒 Carroças</span><b id="cartCount">0</b></div><div><span>🧰 Carrinhos de mão</span><b id="wheelbarrowCount">0</b></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Acesso rápido</h2>
+              <p>Principais operações</p>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <a href="vendas.html"><span>💰</span><div><strong>Nova venda</strong><small>Registrar uma venda</small></div></a>
+            <a href="producao.html"><span>🏭</span><div><strong>Nova produção</strong><small>Registrar produção</small></div></a>
+            <a href="servicos.html"><span>🔧</span><div><strong>Novo serviço</strong><small>Registrar serviço</small></div></a>
+            <a href="gado.html"><span>🐄</span><div><strong>Novo animal</strong><small>Cadastrar animais e lotes</small></div></a>
+            <a href="maquinas.html"><span>🚜</span><div><strong>Nova máquina</strong><small>Cadastrar patrimônio</small></div></a>
+          </div>
+        </div>
+
+        <div class="panel large">
+          <div class="panel-header">
+            <div>
+              <h2>Últimas movimentações</h2>
+              <p>Atividades recentes da fazenda</p>
+            </div>
+            <a href="relatorios.html" class="link">Ver relatórios →</a>
+          </div>
+
+          <div id="recentMovements" class="empty-state">
+            <div>📋</div><strong>Nenhuma movimentação ainda</strong>
+            <p>Quando você cadastrar vendas, produções, serviços ou movimentações de estoque, elas aparecerão aqui.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2026 Minha Fazenda</span>
+        <span>Sistema de Gestão da Fazenda</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="Js/firebase-sync.js?v=12" data-app="Js/app.js"></script>
+</body>
+</html>

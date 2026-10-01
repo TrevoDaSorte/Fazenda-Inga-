@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Estoque - Minha Fazenda</title>
+<link rel="stylesheet" href="Css/style.css"><link rel="stylesheet" href="Css/estoque.css">
+</head>
+<body><div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div><div><strong>Minha Fazenda</strong><span>Sistema de Gestão</span></div></div>
+<nav class="menu">
+<a class="menu-item" href="index.html"><span>🏠</span> Dashboard</a>
+<a class="menu-item" href="vendas.html"><span>💰</span> Vendas</a>
+<a class="menu-item" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a>
+<a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a>
+<a class="menu-item active" href="estoque.html"><span>📦</span> Estoque</a>
+<a class="menu-item" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a>
+<a class="menu-item" href="galeria.html"><span>📷</span> Galeria</a>
+<a class="menu-item" href="relatorios.html"><span>📊</span> Relatórios</a>
+<a class="menu-item" href="administracao.html"><span>⚙️</span> Administração</a>
+<a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a>
+</nav><div class="sidebar-footer"><div class="status-dot"></div>Sistema online</div>
+</aside>
+<main class="main">
+<header class="topbar"><div><p class="eyebrow">GESTÃO DA FAZENDA</p><h1>Estoque</h1><p class="subtitle">Controle produtos, entradas, saídas e quantidades disponíveis.</p></div>
+<div class="top-actions"><button class="icon-btn">🔔<span class="notification">3</span></button><div class="profile"><div class="avatar">FA</div><div><strong>Administrador</strong><span>Gestor da Fazenda</span></div></div></div></header>
+
+<section class="stock-stats">
+<div class="stock-stat"><div class="st-icon green">📦</div><div><span>Produtos cadastrados</span><strong id="productCount">0</strong></div></div>
+<div class="stock-stat"><div class="st-icon blue">⬆️</div><div><span>Entradas no mês</span><strong id="monthEntries">0</strong></div></div>
+<div class="stock-stat"><div class="st-icon orange">⬇️</div><div><span>Saídas no mês</span><strong id="monthExits">0</strong></div></div>
+<div class="stock-stat"><div class="st-icon red">⚠️</div><div><span>Estoque baixo</span><strong id="lowStock">0</strong></div></div>
+</section>
+
+<section class="panel tabs-panel">
+<div class="tabs"><button class="tab active" data-tab="products">📦 Produtos</button><button class="tab" data-tab="movement">↕️ Nova movimentação</button><button class="tab" data-tab="history">📋 Histórico</button></div>
+
+<div id="products" class="tab-content active">
+<div class="section-title"><div><h2>Produtos do estoque</h2><p>Cadastre tudo que deseja controlar na fazenda.</p></div><button class="btn primary" id="newProduct">＋ Novo produto</button></div>
+<div id="productFormBox" class="form-box hidden">
+<h3 id="productFormTitle">Cadastrar produto</h3>
+<form id="productForm"><input type="hidden" id="productId"><div class="form-grid">
+<label><span>Produto *</span><input id="stockName" required placeholder="Ex.: Leite, ração, milho..."></label>
+<label><span>Categoria *</span><select id="stockCategory"><option>Produção</option><option>Alimentação animal</option><option>Insumos</option><option>Medicamentos</option><option>Ferramentas</option><option>Outros</option></select></label>
+<label><span>Unidade *</span><select id="stockUnit"><option>Unidade</option><option>Kg</option><option>Litro</option><option>Saca</option><option>Caixa</option><option>Tonelada</option><option>Outro</option></select></label>
+<label><span>Quantidade inicial</span><input id="initialQuantity" type="number" min="0" step="0.01" value="0"></label>
+<label><span>Estoque mínimo</span><input id="minimumStock" type="number" min="0" step="0.01" value="0"></label>
+<label><span>Valor unitário</span><input id="unitValue" type="number" min="0" step="0.01" value="0"></label>
+<label class="full"><span>Observações</span><textarea id="productNotes" rows="2"></textarea></label>
+</div><div class="form-actions"><button type="button" class="btn secondary" id="cancelProduct">Cancelar</button><button class="btn primary">💾 Salvar produto</button></div></form></div>
+<div class="filters"><input id="productSearch" type="search" placeholder="🔎 Pesquisar produto..."><select id="categoryFilter"><option value="">Todas as categorias</option><option>Produção</option><option>Alimentação animal</option><option>Insumos</option><option>Medicamentos</option><option>Ferramentas</option><option>Outros</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Produto</th><th>Categoria</th><th>Quantidade</th><th>Mínimo</th><th>Valor unit.</th><th>Situação</th><th>Ações</th></tr></thead><tbody id="productTable"></tbody></table></div>
+</div>
+
+<div id="movement" class="tab-content">
+<div class="section-title"><div><h2>Nova movimentação</h2><p>Registre uma entrada ou saída manual do estoque.</p></div></div>
+<form id="movementForm"><div class="form-grid">
+<label><span>Data *</span><input id="movementDate" type="date" required></label>
+<label><span>Tipo *</span><select id="movementType"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select></label>
+<label><span>Produto *</span><select id="movementProduct" required><option value="">Selecione um produto</option></select></label>
+<label><span>Quantidade *</span><input id="movementQuantity" type="number" min="0.01" step="0.01" required></label>
+<label><span>Motivo *</span><select id="movementReason"><option>Produção</option><option>Compra</option><option>Venda</option><option>Consumo interno</option><option>Perda</option><option>Ajuste</option><option>Outro</option></select></label>
+<label><span>Documento / referência</span><input id="movementReference" placeholder="Ex.: Venda 001"></label>
+<label class="full"><span>Observações</span><textarea id="movementNotes" rows="3"></textarea></label>
+</div><div class="form-actions"><button type="reset" class="btn secondary">Limpar</button><button class="btn primary">💾 Registrar movimentação</button></div></form>
+</div>
+
+<div id="history" class="tab-content">
+<div class="section-title"><div><h2>Histórico de movimentações</h2><p>Entradas e saídas registradas no estoque.</p></div></div>
+<div class="filters"><input id="historySearch" type="search" placeholder="🔎 Pesquisar produto..."><select id="typeFilter"><option value="">Entradas e saídas</option><option>Entrada</option><option>Saída</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Data</th><th>Produto</th><th>Tipo</th><th>Quantidade</th><th>Motivo</th><th>Referência</th><th>Ações</th></tr></thead><tbody id="historyTable"></tbody></table></div>
+</div>
+</section>
+<footer><span>© 2026 Minha Fazenda</span><span>Sistema de Gestão da Fazenda</span></footer>
+</main></div><script src="Js/firebase-sync.js?v=11" data-app="Js/estoque.js"></script></body></html>

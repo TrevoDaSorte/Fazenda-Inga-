@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produção - Minha Fazenda</title>
+  <link rel="stylesheet" href="Css/style.css">
+  <link rel="stylesheet" href="Css/producao.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div>
+        <div><strong>Minha Fazenda</strong><span>Sistema de Gestão</span></div>
+      </div>
+      <nav class="menu">
+        <a class="menu-item" href="index.html"><span>🏠</span> Dashboard</a>
+        <a class="menu-item" href="vendas.html"><span>💰</span> Vendas</a>
+        <a class="menu-item active" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a>
+        <a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a>
+        <a class="menu-item" href="estoque.html"><span>📦</span> Estoque</a>
+        <a class="menu-item" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a>
+        <a class="menu-item" href="galeria.html"><span>📷</span> Galeria</a>
+<a class="menu-item" href="relatorios.html"><span>📊</span> Relatórios</a>
+<a class="menu-item" href="administracao.html"><span>⚙️</span> Administração</a>
+        <a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a>
+      </nav>
+      <div class="sidebar-footer"><div class="status-dot"></div>Sistema online</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">GESTÃO DA FAZENDA</p>
+          <h1>Produção</h1>
+          <p class="subtitle">Registre tudo o que é produzido na fazenda.</p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" title="Notificações">🔔<span class="notification">3</span></button>
+          <div class="profile">
+            <div class="avatar">FA</div>
+            <div><strong>Administrador</strong><span>Gestor da Fazenda</span></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="production-stats">
+        <div class="production-stat"><div class="p-icon green">🏭</div><div><span>Registros</span><strong id="recordCount">0</strong></div></div>
+        <div class="production-stat"><div class="p-icon blue">📦</div><div><span>Produção no mês</span><strong id="monthQuantity">0</strong></div></div>
+        <div class="production-stat"><div class="p-icon orange">💰</div><div><span>Custo no mês</span><strong id="monthCost">R$ 0,00</strong></div></div>
+        <div class="production-stat"><div class="p-icon purple">📅</div><div><span>Última produção</span><strong id="lastProduction">-</strong></div></div>
+      </section>
+
+      <section class="panel production-form-panel">
+        <div class="panel-header">
+          <div><h2>Adicionar produção</h2><p>Cadastre um produto fabricado ou produzido na fazenda.</p></div>
+        </div>
+
+        <form id="productionForm">
+          <div class="form-grid">
+            <label><span>Data da produção *</span><input type="date" id="productionDate" required></label>
+            <label><span>Produto produzido *</span><select id="product" required><option value="">Selecione um produto do estoque</option></select></label>
+            <label><span>Quantidade *</span><input type="number" id="quantity" min="0.01" step="0.01" placeholder="0" required></label>
+            <label><span>Unidade *</span>
+              <select id="unit" required>
+                <option value="">Selecione</option><option>Unidade</option><option>Kg</option><option>Litro</option><option>Tonelada</option><option>Caixa</option><option>Saca</option><option>Outro</option>
+              </select>
+            </label>
+            <label><span>Custo de produção</span><input type="number" id="cost" min="0" step="0.01" placeholder="0,00"></label>
+            <label><span>Lote / identificação</span><input type="text" id="batch" placeholder="Ex.: Lote 001"></label>
+            <label class="full"><span>Observações</span><textarea id="notes" rows="3" placeholder="Detalhes sobre a produção..."></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button type="reset" class="btn secondary">Limpar</button>
+            <button type="submit" class="btn primary">💾 Salvar produção</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header production-list-header">
+          <div><h2>Produções cadastradas</h2><p>Consulte e exclua os registros de produção.</p></div>
+          <div class="filters">
+            <input id="searchProduction" type="search" placeholder="🔎 Procurar produto ou lote">
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Produto</th><th>Quantidade</th><th>Unidade</th><th>Custo</th><th>Lote</th><th>Ações</th></tr></thead>
+            <tbody id="productionTable">
+              <tr class="empty-row"><td colspan="7"><div>🏭</div><strong>Nenhuma produção cadastrada</strong><span>As produções salvas aparecerão aqui.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer><span>© 2026 Minha Fazenda</span><span>Sistema de Gestão da Fazenda</span></footer>
+    </main>
+  </div>
+  <script src="Js/firebase-sync.js?v=11" data-app="Js/producao.js"></script>
+</body>
+</html>

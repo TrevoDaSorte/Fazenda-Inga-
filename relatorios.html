@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Relatórios - Minha Fazenda</title><link rel="stylesheet" href="Css/style.css"><link rel="stylesheet" href="Css/relatorios.css"></head><body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div><div><strong>Minha Fazenda</strong><span>Sistema de Gestão</span></div></div><nav class="menu">
+<a class="menu-item" href="index.html"><span>🏠</span> Dashboard</a><a class="menu-item" href="vendas.html"><span>💰</span> Vendas</a><a class="menu-item" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a><a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a><a class="menu-item" href="estoque.html"><span>📦</span> Estoque</a><a class="menu-item" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a><a class="menu-item active" href="relatorios.html"><span>📊</span> Relatórios</a><a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a></nav><div class="sidebar-footer"><div class="status-dot"></div>Sistema online</div></aside>
+<main class="main"><header class="topbar"><div><p class="eyebrow">GESTÃO DA FAZENDA</p><h1>Relatórios</h1><p class="subtitle">Visão consolidada das movimentações e resultados da fazenda.</p></div><div class="top-actions"><button class="icon-btn">🔔<span class="notification">3</span></button><div class="profile"><div class="avatar">FA</div><div><strong>Administrador</strong><span>Gestor da Fazenda</span></div></div></div></header>
+
+<section class="panel filter-panel"><div class="filter-head"><div><h2>Período do relatório</h2><p>Escolha as datas para analisar vendas, produção e serviços.</p></div><div class="period-actions"><button class="quick active" data-period="month">Este mês</button><button class="quick" data-period="year">Este ano</button><button class="quick" data-period="all">Tudo</button></div></div><div class="date-row"><label><span>Data inicial</span><input type="date" id="startDate"></label><label><span>Data final</span><input type="date" id="endDate"></label><button class="btn primary" id="applyFilter">🔎 Gerar relatório</button><button class="btn secondary" id="printReport">🖨️ Imprimir</button></div></section>
+
+<section class="report-stats">
+<div class="report-stat"><div class="r-icon green">💰</div><div><span>Vendas no período</span><strong id="salesValue">R$ 0,00</strong><small id="salesCount">0 vendas</small></div></div>
+<div class="report-stat"><div class="r-icon blue">🏭</div><div><span>Produções</span><strong id="productionCount">0</strong><small id="productionQty">0 produzidos</small></div></div>
+<div class="report-stat"><div class="r-icon orange">🔧</div><div><span>Serviços</span><strong id="servicesValue">R$ 0,00</strong><small id="servicesCount">0 serviços</small></div></div>
+<div class="report-stat"><div class="r-icon red">🧾</div><div><span>Despesas</span><strong id="expensesValue">R$ 0,00</strong><small id="expensesCount">0 despesas</small></div></div><div class="report-stat"><div class="r-icon purple">🐄</div><div><span>Rebanho ativo</span><strong id="cattleCount">0</strong><small id="cattleDetail">0 vacas • 0 jovens</small></div></div>
+</section>
+
+<section class="report-grid">
+<div class="panel"><div class="panel-header"><div><h2>Resumo financeiro</h2><p>Integração automática de vendas, despesas e serviços no período.</p></div></div><div class="finance-lines">
+<div><span>Receita de vendas</span><strong id="financeSales">R$ 0,00</strong></div>
+<div><span>Serviços prestados (receita)</span><strong id="financeProvided">R$ 0,00</strong></div>
+<div><span>Serviços contratados (saída)</span><strong class="negative" id="financeHired">R$ 0,00</strong></div>
+<div><span>Compras / despesas (saída)</span><strong class="negative" id="financeExpenses">R$ 0,00</strong></div>
+<div class="balance"><span>Saldo operacional registrado</span><strong id="financeBalance">R$ 0,00</strong></div>
+<div><span>Despesas pagas</span><strong id="expensesPaid">R$ 0,00</strong></div>
+<div><span>Despesas pendentes/parciais</span><strong class="negative" id="expensesPending">R$ 0,00</strong></div>
+<div><span>Serviços pagos</span><strong id="servicesPaid">R$ 0,00</strong></div>
+<div><span>Serviços pendentes/parciais</span><strong class="negative" id="servicesPending">R$ 0,00</strong></div>
+</div><p class="note">* Lançamentos com status “Parcial” aparecem como pendentes/parciais pelo valor total, pois o sistema ainda não possui um campo para informar quanto já foi pago. O saldo operacional usa os valores totais registrados e não representa contabilidade completa.</p></div>
+<div class="panel"><div class="panel-header"><div><h2>Situação atual</h2><p>Estoque e rebanho neste momento.</p></div></div><div class="current-grid"><div><span>Produtos em estoque</span><strong id="stockProducts">0</strong></div><div><span>Estoque baixo</span><strong id="stockLow">0</strong></div><div><span>Animais ativos</span><strong id="activeAnimals">0</strong></div><div><span>Animais vendidos</span><strong id="soldAnimals">0</strong></div></div></div>
+</section>
+
+<section class="panel"><div class="report-tabs"><button class="report-tab active" data-table="salesSection">💰 Vendas</button><button class="report-tab" data-table="expensesSection">🧾 Despesas</button><button class="report-tab" data-table="productionSection">🏭 Produção</button><button class="report-tab" data-table="servicesSection">🔧 Serviços</button><button class="report-tab" data-table="stockSection">📦 Estoque</button><button class="report-tab" data-table="cattleSection">🐄 Gado</button></div>
+<div id="salesSection" class="table-section active"><h3>Vendas no período</h3><div class="table-wrap"><table><thead><tr><th>Data</th><th>Cliente</th><th>Produto</th><th>Quantidade</th><th>Total</th><th>Status</th></tr></thead><tbody id="salesTable"></tbody></table></div></div>
+<div id="expensesSection" class="table-section"><h3>Despesas no período</h3><div class="table-wrap"><table><thead><tr><th>Data</th><th>Item</th><th>Categoria</th><th>Fornecedor</th><th>Quantidade</th><th>Total</th><th>Status</th></tr></thead><tbody id="expensesTable"></tbody></table></div></div><div id="productionSection" class="table-section"><h3>Produção no período</h3><div class="table-wrap"><table><thead><tr><th>Data</th><th>Produto</th><th>Quantidade</th><th>Unidade</th><th>Custo</th><th>Lote</th></tr></thead><tbody id="productionTable"></tbody></table></div></div>
+<div id="servicesSection" class="table-section"><h3>Serviços no período</h3><div class="table-wrap"><table><thead><tr><th>Data</th><th>Serviço</th><th>Tipo</th><th>Responsável</th><th>Valor</th><th>Status</th></tr></thead><tbody id="servicesTable"></tbody></table></div></div>
+<div id="stockSection" class="table-section"><h3>Situação atual do estoque</h3><div class="table-wrap"><table><thead><tr><th>Produto</th><th>Categoria</th><th>Quantidade</th><th>Mínimo</th><th>Valor unit.</th><th>Situação</th></tr></thead><tbody id="stockTable"></tbody></table></div></div>
+<div id="cattleSection" class="table-section"><h3>Situação atual do rebanho</h3><div class="table-wrap"><table><thead><tr><th>Brinco</th><th>Nome</th><th>Categoria</th><th>Raça</th><th>Peso</th><th>Situação</th></tr></thead><tbody id="cattleTable"></tbody></table></div></div>
+</section>
+<footer><span>© 2026 Minha Fazenda</span><span>Sistema de Gestão da Fazenda</span></footer></main></div><script src="Js/firebase-sync.js?v=11" data-app="Js/relatorios.js"></script></body></html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendas - Minha Fazenda</title>
+  <link rel="stylesheet" href="Css/style.css">
+  <link rel="stylesheet" href="Css/vendas.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><img src="img/logo-fazenda.png" alt="Logotipo da Fazenda"></div>
+        <div>
+          <strong>Minha Fazenda</strong>
+          <span>Sistema de Gestão</span>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item" href="index.html"><span>🏠</span> Dashboard</a>
+        <a class="menu-item active" href="vendas.html"><span>💰</span> Vendas</a>
+        <a class="menu-item" href="despesas.html"><span>🧾</span> Despesas</a><a class="menu-item" href="producao.html"><span>🏭</span> Produção</a>
+        <a class="menu-item" href="servicos.html"><span>🔧</span> Serviços</a>
+        <a class="menu-item" href="estoque.html"><span>📦</span> Estoque</a>
+        <a class="menu-item" href="gado.html"><span>🐄</span> Animais</a>
+<a class="menu-item" href="maquinas.html"><span>🚜</span> Máquinas e Transportes</a>
+        <a class="menu-item" href="galeria.html"><span>📷</span> Galeria</a>
+<a class="menu-item" href="relatorios.html"><span>📊</span> Relatórios</a>
+<a class="menu-item" href="administracao.html"><span>⚙️</span> Administração</a>
+        <a class="menu-item" href="quem-somos.html"><span>🌿</span> Quem Somos</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-dot"></div>
+        Sistema online
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">GESTÃO DE VENDAS</p>
+          <h1>Vendas</h1>
+          <p class="subtitle">Cadastre, consulte e acompanhe as vendas da fazenda.</p>
+        </div>
+
+        <div class="top-actions">
+          <button class="icon-btn" title="Notificações">🔔<span class="notification">3</span></button>
+          <div class="profile">
+            <div class="avatar">FA</div>
+            <div>
+              <strong>Administrador</strong>
+              <span>Gestor da Fazenda</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="sales-stats">
+        <div class="sales-stat">
+          <div class="sales-stat-icon green">💰</div>
+          <div><span>Vendas hoje</span><strong id="todayTotal">R$ 0,00</strong></div>
+        </div>
+        <div class="sales-stat">
+          <div class="sales-stat-icon blue">📅</div>
+          <div><span>Vendas no mês</span><strong id="monthTotal">R$ 0,00</strong></div>
+        </div>
+        <div class="sales-stat">
+          <div class="sales-stat-icon orange">🧾</div>
+          <div><span>Quantidade de vendas</span><strong id="salesCount">0</strong></div>
+        </div>
+        <div class="sales-stat">
+          <div class="sales-stat-icon purple">⏳</div>
+          <div><span>Recebimentos pendentes</span><strong id="pendingTotal">R$ 0,00</strong></div>
+        </div>
+      </section>
+
+      <section class="panel sale-form-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Adicionar venda</h2>
+            <p>Preencha os dados da venda e salve o registro.</p>
+          </div>
+        </div>
+
+        <form id="saleForm">
+          <div class="form-grid">
+            <label>
+              <span>Data da venda *</span>
+              <input type="date" id="saleDate" required>
+            </label>
+
+            <label>
+              <span>Cliente *</span>
+              <input type="text" id="customer" placeholder="Nome do cliente" required>
+            </label>
+
+            <label>
+              <span>Produto *</span>
+              <select id="product" required><option value="">Selecione um produto do estoque</option></select>
+            </label>
+
+            <label>
+              <span>Quantidade *</span>
+              <input type="number" id="quantity" min="0.01" step="0.01" placeholder="0" required>
+            </label>
+
+            <label>
+              <span>Valor unitário *</span>
+              <input type="number" id="unitPrice" min="0" step="0.01" placeholder="0,00" required>
+            </label>
+
+            <label>
+              <span>Forma de pagamento *</span>
+              <select id="paymentMethod" required>
+                <option value="">Selecione</option>
+                <option>Dinheiro</option>
+                <option>PIX</option>
+                <option>Cartão de débito</option>
+                <option>Cartão de crédito</option>
+                <option>Transferência</option>
+                <option>Outro</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Status do pagamento</span>
+              <select id="paymentStatus">
+                <option>Pago</option>
+                <option>Pendente</option>
+                <option>Parcial</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Comprovante</span>
+              <input type="file" id="receipt" accept="image/*,.pdf">
+            </label>
+
+            <label class="full">
+              <span>Observações</span>
+              <textarea id="notes" rows="3" placeholder="Informações adicionais sobre a venda..."></textarea>
+            </label>
+          </div>
+
+          <div class="form-total">
+            <span>Total da venda</span>
+            <strong id="saleTotal">R$ 0,00</strong>
+          </div>
+
+          <div class="form-actions">
+            <button type="reset" class="btn secondary">Limpar</button>
+            <button type="submit" class="btn primary">💾 Salvar venda</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header sales-list-header">
+          <div>
+            <h2>Vendas cadastradas</h2>
+            <p>Consulte, visualize e exclua os registros.</p>
+          </div>
+          <div class="filters">
+            <input id="searchSales" type="search" placeholder="🔎 Procurar cliente ou produto">
+            <select id="filterPayment">
+              <option value="">Todos os pagamentos</option>
+              <option>Pago</option>
+              <option>Pendente</option>
+              <option>Parcial</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Qtd.</th>
+                <th>Total</th>
+                <th>Pagamento</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="salesTable">
+              <tr class="empty-row">
+                <td colspan="8">
+                  <div>🧾</div>
+                  <strong>Nenhuma venda cadastrada</strong>
+                  <span>As vendas que você salvar aparecerão aqui.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2026 Minha Fazenda</span>
+        <span>Sistema de Gestão da Fazenda</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="Js/firebase-sync.js?v=11" data-app="Js/vendas.js"></script>
+</body>
+</html>
