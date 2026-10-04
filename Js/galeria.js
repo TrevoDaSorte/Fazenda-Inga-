@@ -14,11 +14,19 @@ const status=(msg,warn=false)=>{ $('driveStatus').textContent=msg; $('driveStatu
 const apiKeyReady=()=>API_KEY && !API_KEY.includes('COLE_AQUI');
 function enableConnected(){ $('chooseFolder').disabled=!accessToken; $('refreshGallery').disabled=!(accessToken&&folderId); $('fileInput').disabled=!(accessToken&&folderId); $('uploadLabel').classList.toggle('disabled',!(accessToken&&folderId)); }
 function waitForGoogle(){return new Promise((resolve,reject)=>{let n=0;const t=setInterval(()=>{if(window.google?.accounts?.oauth2&&window.gapi){clearInterval(t);resolve()}else if(++n>200){clearInterval(t);reject(new Error('O Google não carregou. Confira a internet e atualize a página.'))}},100)})}
+function loadPicker(){return new Promise((resolve,reject)=>{
+  if(window.google?.picker?.PickerBuilder)return resolve();
+  if(!window.gapi?.load)return reject(new Error('A biblioteca Google Picker não está disponível.'));
+  let finished=false;
+  const timer=setTimeout(()=>{if(!finished){finished=true;reject(new Error('O Google Picker demorou para carregar. Atualize a página e tente novamente.'))}},15000);
+  try{gapi.load('picker',{callback:()=>{if(finished)return;finished=true;clearTimeout(timer);window.google?.picker?.PickerBuilder?resolve():reject(new Error('O Google Picker não foi inicializado.'));},onerror:()=>{if(finished)return;finished=true;clearTimeout(timer);reject(new Error('Falha ao carregar o Google Picker.'));},timeout:10000,ontimeout:()=>{if(finished)return;finished=true;clearTimeout(timer);reject(new Error('Tempo esgotado ao carregar o Google Picker.'));}})}catch(e){if(!finished){finished=true;clearTimeout(timer);reject(e)}}
+})}
 function connectionLost(message){accessToken='';sessionStorage.removeItem(TOKEN_KEY);sessionStorage.removeItem(TOKEN_EXP_KEY);enableConnected();status(message||'A autorização do Google expirou. Toque em “Conectar Google Drive” para continuar.',true)}
 async function init(){
   status('Preparando a conexão com o Google Drive...');
   try{
     await waitForGoogle();
+    await loadPicker();
     tokenClient=google.accounts.oauth2.initTokenClient({
       client_id:CLIENT_ID,scope:SCOPE,
       callback:r=>{
@@ -41,11 +49,12 @@ $('connectDrive').onclick=()=>{
   try{tokenClient.requestAccessToken({prompt:accessToken?'':'select_account'})}
   catch(e){status('Não foi possível abrir o Google. Abra o site diretamente no Chrome. '+e.message,true)}
 };
-$('chooseFolder').onclick=()=>{
+$('chooseFolder').onclick=async()=>{
   if(!accessToken)return;
   if(!apiKeyReady())return status('Falta a chave da API do Google Picker. Configure-a antes de autorizar a pasta.',true);
+  status('Preparando o seletor de pastas do Google...');
+  try{await loadPicker()}catch(e){return status(e.message,true)}
   status('Abrindo o seletor de pastas do Google...');
-  if(!window.google?.picker?.PickerBuilder)return status('O seletor de pastas ainda está carregando. Aguarde alguns segundos e tente novamente.',true);
   const view=new google.picker.DocsView(google.picker.ViewId.FOLDERS).setIncludeFolders(true).setSelectFolderEnabled(true);
   const picker=new google.picker.PickerBuilder().setAppId(APP_ID).setOAuthToken(accessToken).setDeveloperKey(API_KEY).addView(view).setTitle('Selecione a pasta Galeria').setCallback(data=>{
     if(data.action===google.picker.Action.PICKED&&data.docs?.[0]){
