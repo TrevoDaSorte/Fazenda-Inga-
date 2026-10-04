@@ -6,18 +6,23 @@ const APP_ID='12112211460';
 const EXPECTED_FOLDER_ID='12qtKXv6FJCO8XJwUOTmR-rh0t6rsOwsK';
 const SCOPE='https://www.googleapis.com/auth/drive.file';
 let tokenClient=null, accessToken='', folderId=localStorage.getItem('fazenda_gallery_folder')||'', objectUrls=[];
+const TOKEN_KEY='fazenda_gallery_google_token', TOKEN_EXP_KEY='fazenda_gallery_google_token_exp';
+function saveToken(token,expiresIn){ accessToken=token||''; if(accessToken){ sessionStorage.setItem(TOKEN_KEY,accessToken); sessionStorage.setItem(TOKEN_EXP_KEY,String(Date.now()+Math.max(60,Number(expiresIn||3600)-60)*1000)); } }
+function restoreToken(){ const t=sessionStorage.getItem(TOKEN_KEY)||''; const exp=Number(sessionStorage.getItem(TOKEN_EXP_KEY)||0); if(t && exp>Date.now()){ accessToken=t; return true; } sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_EXP_KEY); return false; }
 const $=id=>document.getElementById(id);
 const status=(msg,warn=false)=>{ $('driveStatus').textContent=msg; $('driveStatus').className='drive-status'+(warn?' config-warning':''); };
 const apiKeyReady=()=>API_KEY && !API_KEY.includes('COLE_AQUI');
 function enableConnected(){ $('chooseFolder').disabled=!accessToken; $('refreshGallery').disabled=!(accessToken&&folderId); $('fileInput').disabled=!(accessToken&&folderId); $('uploadLabel').classList.toggle('disabled',!(accessToken&&folderId)); }
 function waitForGoogle(){return new Promise((resolve,reject)=>{let n=0;const t=setInterval(()=>{if(window.google?.accounts?.oauth2&&window.gapi){clearInterval(t);resolve()}else if(++n>100){clearInterval(t);reject(new Error('Bibliotecas do Google não carregaram.'))}},100)})}
 async function init(){
-  try{await waitForGoogle();tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPE,callback:r=>{if(r.error){status('Não foi possível autorizar o Google Drive.',true);return}accessToken=r.access_token;enableConnected();status(folderId?'Drive conectado. Autorize novamente a pasta Galeria se o acesso tiver expirado.':'Drive conectado. Agora autorize a pasta Galeria.');if(folderId)loadGallery().catch(()=>{})}});gapi.load('picker',()=>{});
+  try{await waitForGoogle();tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPE,callback:r=>{if(r.error){status('Não foi possível autorizar o Google Drive.',true);return}saveToken(r.access_token,r.expires_in);enableConnected();status(folderId?'Google Drive conectado. Pasta Galeria pronta para sincronizar.':'Google Drive conectado. Agora toque em “Autorizar pasta Galeria”.');if(folderId)loadGallery().catch(()=>{})}});gapi.load('picker',()=>{});
+  const restored=restoreToken(); enableConnected();
   if(!apiKeyReady()) status('Galeria instalada. Falta cadastrar a chave da API do Google Picker para concluir a conexão.',true);
-  else if(folderId) status('Clique em “Conectar Google Drive” para abrir sua galeria.');
+  else if(restored) { status(folderId?'Google Drive conectado. Sincronizando a Galeria...':'Google Drive conectado. Agora toque em “Autorizar pasta Galeria”.'); if(folderId) loadGallery().catch(()=>{}); }
+  else if(folderId) status('Clique em “Conectar Google Drive” para renovar a conexão.');
   }catch(e){status(e.message,true)}
 }
-$('connectDrive').onclick=()=>{if(!tokenClient)return status('Aguarde o Google terminar de carregar.',true);tokenClient.requestAccessToken({prompt:accessToken?'':'consent'})};
+$('connectDrive').onclick=()=>{if(!tokenClient)return status('Aguarde o Google terminar de carregar.',true);status('Abrindo autorização do Google Drive...');tokenClient.requestAccessToken({prompt:accessToken?'':'consent'})};
 $('chooseFolder').onclick=()=>{
   if(!accessToken)return;
   if(!apiKeyReady())return status('Falta a chave da API do Google Picker. Configure-a antes de autorizar a pasta.',true);

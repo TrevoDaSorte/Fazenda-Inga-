@@ -116,7 +116,7 @@
         window.AdminFazendaLogout=async()=>{await window.AdminFazendaFlush();await auth.signOut();location.replace('login.html')};
         addLogout();
         const isDashboard=/\/app\.js$/i.test(appScript)||appScript==='Js/app.js';
-        const loadApp=()=>{if(!appScript||window.__AFappLoaded)return;window.__AFappLoaded=true;const s=document.createElement('script');s.src=appScript+'?v=12';document.body.appendChild(s)};
+        const loadApp=()=>{if(!appScript||window.__AFappLoaded)return;window.__AFappLoaded=true;const s=document.createElement('script');s.src=appScript+'?v=13.1';document.body.appendChild(s)};
         if(isDashboard){
           // V12 cache-first: paint the dashboard from the last verified Firestore cache immediately.
           // Refresh all collections in parallel in the background, then repaint with authoritative data.
